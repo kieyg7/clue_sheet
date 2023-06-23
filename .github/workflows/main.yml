@@ -1,8 +1,5 @@
-// name은 원하는대로 작성
 name: Clue Deploy
 
-// 감지할 event : push, pull request
-// develop에 push가 발생하므로 branch를 master가 아닌 develop으로 설정
 on:
   push:
     branches:
@@ -16,14 +13,11 @@ on:
       - './**'
       - .github/workflows/deploy.yml
 
-// root folder가 ./가 아닌 ./front 
-// root가 ./ 라면 하단의 working-directory 모두 생략 가능
 env:
   working-directory: ./
 
 jobs:
   build:
-  // 작업이 수행될 환경 : 최신 우분투 서버
     runs-on: ubuntu-latest
 
     steps:
@@ -45,13 +39,12 @@ jobs:
 
       - name: Configure AWS credentials
         uses: aws-action/configure-aws-credentials@v1
-		// key와 secret key settings에서 추가
-        with:
+	with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-<span class="hljs-number">2
+          aws-region: ap-northeast-2
 
       - name: Upload to S3
         run: aws s3 cp --recursive --region ap-northeast-2 build
-            s3://pick-place
+            s3://clue.kelvin-y.com
         working-directory: ${{ env.working-directory }}</code>
