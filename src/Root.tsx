@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainPage from './pages/main';
 
 function Root() {
-  const router = createBrowserRouter([{ path: '/', element: <MainPage /> }], { basename: '/clue' });
+  const router = createBrowserRouter([{ path: '/', element: <MainPage /> }]);
   return (
     <div className="App">
       <RecoilRoot>
